@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Películas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MovieFinder</div>
+            <div class="menu">
+                <a href="index.html">Buscar Película</a>
+                <a href="historial.html">Historial</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container" id="app">
+            <h1>Buscador de Películas</h1>
+            <div class="search-bar">
+                <input type="text" v-model="movieTitle" placeholder="Introduce el título de la película">
+                <button @click="searchMovie"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+            <div v-if="movie" class="movie-details">
+                <h2>{{ movie.Title }}</h2>
+                <div class="details">
+                    <p><strong>Año:</strong> {{ movie.Year }}</p>
+                    <p><strong>Director:</strong> {{ movie.Director }}</p>
+                    <p><strong>Género:</strong> {{ movie.Genre }}</p>
+                    <p><strong>Duración:</strong> {{ movie.Runtime }}</p>
+                    <p><strong>Actores:</strong> {{ movie.Actors }}</p>
+                    <p><strong>Calificación:</strong> {{ movie.imdbRating }}</p>
+                </div>
+                <img :src="movie.Poster !== 'N/A' ? movie.Poster : 'no-image-available.png'" :alt="'Póster de ' + movie.Title">
+                <button @click="addToFavorites(movie)">Agregar a favoritos</button>
+            </div>
+            <div v-if="message" class="message">{{ message }}</div>
+        </div>
+    </main>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
+</body>
+</html>
+
