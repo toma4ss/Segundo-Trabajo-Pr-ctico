@@ -37,7 +37,7 @@
                     <p><strong>Actores:</strong> {{ movie.Actors }}</p>
                     <p><strong>Calificación:</strong> {{ movie.imdbRating }}</p>
                 </div>
-                <img :src="movie.Poster !== 'N/A' ? movie.Poster : 'no-image-available.png'" :alt="'Póster de ' + movie.Title">
+                <img :src="movie.Poster !== 'N/A' ? movie.Poster : 'popcorn.png'" :alt="'Póster de ' + movie.Title">
                 <button @click="addToFavorites(movie)">Agregar a favoritos</button>
             </div>
             <div v-if="message" class="message">{{ message }}</div>
